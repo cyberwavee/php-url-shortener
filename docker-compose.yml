@@ -1,0 +1,50 @@
+version: "3.7"
+
+services:
+    app:
+        build:
+            args:
+                user: admin
+                uid: 1000
+            context: ./
+            dockerfile: docker/7.4/Dockerfile
+        container_name: url-shortener-app
+        restart: unless-stopped
+        working_dir: /var/www/
+        volumes:
+            - ./:/var/www
+            - ./docker/7.4/php.ini:/usr/local/etc/php/conf.d/php.ini
+        networks:
+            - url-shortener
+
+    db:
+        image: mysql:5.7
+        container_name: url-shortener-db
+        restart: unless-stopped
+        ports:
+            - "3306:3306"
+        environment:
+            MYSQL_DATABASE: ${DB_DATABASE}
+            MYSQL_ROOT_PASSWORD: secret_root_password
+            MYSQL_PASSWORD: ${DB_PASSWORD}
+            MYSQL_USER: ${DB_USERNAME}
+        volumes:
+            - ./docker-compose/mysql:/docker-entrypoint-initdb.d
+        networks:
+            - url-shortener
+
+    nginx:
+        image: nginx:latest
+        container_name: url-shortener-nginx
+        restart: unless-stopped
+        ports:
+            - 8000:80
+        volumes:
+            - ./:/var/www
+            - ./docker/7.4/nginx:/etc/nginx/conf.d/
+        networks:
+            - url-shortener
+
+networks:
+    url-shortener:
+        driver: bridge
