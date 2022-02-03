@@ -16,6 +16,7 @@ class CreateShortLinksTable extends Migration
         Schema::create('short_links', function (Blueprint $table) {
             $table->id('short_link_id');
 
+            $table->string('title');
             $table->string('short_code')->unique('short_code__index');
             $table->text('original_link');
 

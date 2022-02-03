@@ -14,7 +14,9 @@ class ShortenUrlRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'url_link' => 'required|url'
+            'long_url' => 'required|url',
+            'title' => 'required|string',
+            'tags' => 'nullable|array'
         ];
     }
 }

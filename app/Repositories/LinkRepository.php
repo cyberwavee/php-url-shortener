@@ -51,7 +51,7 @@ class LinkRepository
      */
     public function createShortLink(array $attributes): ShortLink
     {
-        $data = Arr::only($attributes, ['short_code', 'original_link']);
+        $data = Arr::only($attributes, ['short_code', 'original_link', 'title']);
 
         /** @var ShortLink $shortLink */
         $shortLink = $this->queryObject()->create($data);

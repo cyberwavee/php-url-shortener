@@ -22,10 +22,11 @@ class ShortenerUrlController extends Controller
      */
     public function shortenUrl(ShortenUrlRequest $request, ShortenerUrlService $shortenerUrlService): JsonResponse
     {
-        $originalLink = $request->get('url_link');
+        $shortLinkAttributes = $request->all('long_url', 'title');
+        $tags = $request->get('tags') ?? [];
 
         return response()->json(['data' => [
-            'url' => env('APP_URL') . '/' . $shortenerUrlService->createShortLink($originalLink),
+            'url' => env('APP_URL') . '/' . $shortenerUrlService->createShortLink($shortLinkAttributes, $tags),
         ]]);
     }
 }

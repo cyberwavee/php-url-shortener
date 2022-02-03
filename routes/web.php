@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Web\LinkController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,7 +14,11 @@ use App\Http\Controllers\Web\LinkController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('login');
 });
 
-Route::get('/{short_link}', [LinkController::class, 'redirectToOriginalLink']);
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
+
+require __DIR__.'/auth.php';

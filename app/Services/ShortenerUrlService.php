@@ -17,14 +17,15 @@ class ShortenerUrlService
     }
 
     /**
-     * @param string $originalLink
+     * @param array $shortLinkAttributes
+     * @param array $tags
      *
      * @return string
      * @throws Exception
      */
-    public function createShortLink(string $originalLink): string
+    public function createShortLink(array $shortLinkAttributes, array $tags): string
     {
-        $shortLink = $this->shortenerUrlRepository->getShortLinkByOriginalLink($originalLink);
+        $shortLink = $this->shortenerUrlRepository->getShortLinkByOriginalLink($shortLinkAttributes['long_url']);
 
         if ($shortLink) {
             return $shortLink->short_code;
@@ -33,7 +34,8 @@ class ShortenerUrlService
         $shortCode = $this->generateShortCode();
         $shortLink = $this->shortenerUrlRepository->createShortLink([
             'short_code' => $shortCode,
-            'original_link' => $originalLink,
+            'original_link' => $shortLinkAttributes['long_url'],
+            'title' => $shortLinkAttributes['title'],
         ]);
 
         return $shortLink->short_code;

@@ -1,0 +1,107 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+
+.url_shortener_block {
+    display: flex;
+    justify-content: center;
+    font-family: Roboto, Arial, sans-serif;
+    font-size: 15px;
+}
+form {
+    border: 5px solid #f1f1f1;
+}
+input[type=text], input[type=password] {
+    width: 100%;
+    padding: 16px 8px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+/*.icon {*/
+/*    font-size: 110px;*/
+/*    display: flex;*/
+/*    justify-content: center;*/
+/*    color: #4286f4;*/
+/*}*/
+button {
+    background-color: #4286f4;
+    color: white;
+    padding: 14px 0;
+    margin: 10px 0;
+    border: none;
+    cursor: grab;
+    width: 48%;
+}
+h1 {
+    text-align:center;
+    fone-size:18;
+}
+button:hover {
+    opacity: 0.8;
+}
+.formcontainer {
+    text-align: center;
+    margin: 24px 50px 12px;
+}
+.container {
+    padding: 16px 0;
+    text-align:left;
+}
+span.psw {
+    float: right;
+    padding-top: 0;
+    padding-right: 15px;
+}
+/* Change styles for span on extra small screens */
+@media screen and (max-width: 300px) {
+    span.psw {
+        display: block;
+        float: none;
+    }
+}
+
+
+.input_copy {
+    padding: 15px 25px;
+    background: #eee;
+    border: 2px solid #aaa;
+    color: #aaa;
+    font-size: .8em;
+}
+
+.input_copy .icon {
+    display: block;
+    max-width: 25px;
+    cursor: pointer;
+    float: right;
+}
+
+.input_copy .icon img{
+    max-width: 25px;
+}
+.input_copy .txt {
+    width: 80%;
+    display: inline-block;
+    overflow: hidden;
+}
+
+
+/* click animation */
+
+.flashBG {
+    animation-name: flash;
+    animation-timing-function: ease-out;
+    animation-duration: 1s;
+}
+
+@keyframes flash {
+    0% {
+        background: #28a745;
+    }
+    100% {
+        background: transparent;
+    }
+}
